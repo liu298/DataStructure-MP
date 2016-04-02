@@ -20,8 +20,11 @@ void Quadtree::buildTree(PNG const & source, int resol)
 {
 	resolution = resol;
 	clear(root);
+<<<<<<< HEAD
+=======
 	//Quadtree tree;
 	root = new QuadtreeNode;
+>>>>>>> parent of b639119... ctor
 	int h=0;
 	embedPNG(source,root,h,(double)(resolution-1)/2,(double)(resolution-1)/2,resolution);
 
@@ -39,8 +42,8 @@ Quadtree::QuadtreeNode::QuadtreeNode()
 void Quadtree::embedPNG(PNG const & source, QuadtreeNode * &subRoot,int h, 
 								double x_cor, double y_cor, int resolution)
 {
+	subRoot = new QuadtreeNode();
 	if(resolution == 0) return;
-		subRoot = new QuadtreeNode();
 	int height = log2 (resolution);
 	double nodeWidth = resolution/pow(2,h);
 	
@@ -48,14 +51,7 @@ void Quadtree::embedPNG(PNG const & source, QuadtreeNode * &subRoot,int h,
 	{	
 		subRoot->element = *source(x_cor,y_cor);
 		return;
-	}
-/*
-	//do something
-	embedPNG(source,subRoot->nwChild,h+1,x_cor-nodeWidth/4,y_cor-nodeWidth/4,resolution);
-	embedPNG(source,subRoot->neChild,h,x_cor+nodeWidth,y_cor,resolution);
-	embedPNG(source,subRoot->swChild,h,x_cor-nodeWidth,y_cor+nodeWidth,resolution);
-	embedPNG(source,subRoot->seChild,h,x_cor+nodeWidth,y_cor,resolution);
-*/	
+	}	
 
 	embedPNG(source,subRoot->nwChild,h+1,x_cor-nodeWidth/4,y_cor-nodeWidth/4,resolution);
 	embedPNG(source,subRoot->neChild,h+1,x_cor+nodeWidth/4,y_cor-nodeWidth/4,resolution);
@@ -83,9 +79,11 @@ Quadtree::Quadtree():root(NULL),resolution(0)
 // The 	two arguments constructor 
 Quadtree::Quadtree(PNG const & source, int resol)
 {
-	root = NULL;
 	resolution = resol;
+<<<<<<< HEAD
+=======
 	int height=log2 (resolution);
+>>>>>>> parent of b639119... ctor
 	int h=0;
 	embedPNG(source,root,h,(double)(resolution-1)/2,(double)(resolution-1)/2,resol);
 }
@@ -138,10 +136,19 @@ void Quadtree::clear(QuadtreeNode * &subRoot)
 Quadtree const & Quadtree::operator=(Quadtree const & other)
 {
 	if(this == &other) return *this;
+<<<<<<< HEAD
+	else
+	{
+		clear(root);
+		root = copyNode(other.root);
+		resolution = other.resolution;
+	}
+=======
 	clear(root);
 	root = new QuadtreeNode;
 	root = copyNode(other.root);
 	resolution = other.resolution;
+>>>>>>> parent of b639119... ctor
 	return *this;
 }	
 
@@ -357,12 +364,18 @@ int Quadtree::idealPrune(int numLeaves)	const
 	int maxTol = pow(255,2)*3;
 	int minTol = 0;
 
-	if(numLeaves <= 1) return checkNumLeaves(1,(maxTol+minTol)/2, maxTol, maxTol);
-	if(numLeaves >= pruneSize(0)) return 0;
+	if(numLeaves < 1) 
+	{
+		cout << "Wrong num of leaves!" << endl;
+		return maxTol+1;
+	}
+		
+	if(numLeaves > pruneSize(0))
+		numLeaves = pruneSize(0);
 	//if(numLeaves < 1) return idealPrune(1);
 	//int maxTol = maxDistRoot2Leave(root, root);
 
-	else return checkNumLeaves(numLeaves, (minTol+maxTol)/2, minTol, maxTol);
+	return checkNumLeaves(numLeaves, (minTol+maxTol)/2, minTol, maxTol);
 
 }
 /*
@@ -387,9 +400,9 @@ int Quadtree::checkNumLeaves(int numLeaves, int quasiTol, int min, int max) cons
 //	if (max<min)
 //		return min;
 	if(curNum>numLeaves )
-		return checkNumLeaves(numLeaves, (quasiTol+max)/2, quasiTol, max);
+		return checkNumLeaves(numLeaves, (quasiTol+max)/2, quasiTol+1, max);
 	if(curNum<numLeaves )
-		return checkNumLeaves(numLeaves, (quasiTol+min)/2, min, quasiTol);
+		return checkNumLeaves(numLeaves, (quasiTol+min)/2, min, quasiTol-1);
 	else 
 	{
 				/*
