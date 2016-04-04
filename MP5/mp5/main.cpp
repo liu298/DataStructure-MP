@@ -37,9 +37,19 @@ int main()
 
    // cout << "fullTree.pruneSize(195075) = " << fullTree.pruneSize(195075) << endl;
     cout << "fullTree.idealPrune(1) = "  << fullTree.idealPrune(1) << endl;
+    cout << "fullTree.idealPrune(2) = "  << fullTree.idealPrune(2) << endl;
+    // << "fullTree.idealPrune(3) = "  << fullTree.idealPrune(3) << endl;
     cout << "fullTree.idealPrune(1000) = "  << fullTree.idealPrune(1000) << endl;
+    cout << "fullTree.idealPrune(5000) = "  << fullTree.idealPrune(5000) << endl;
     cout << "fullTree.idealPrune(10000) = " << fullTree.idealPrune(10000) << endl;
-     /* */
+    //cout << "fullTree.idealPrune(0) = " << fullTree.idealPrune(0) << endl;
+    //cout << "fullTree.pruneSize(fullTree.idealPrune(1)) "<< fullTree.pruneSize(fullTree.idealPrune(1)) << endl;
+    //cout << "fullTree.pruneSize(fullTree.idealPrune(2)) "<< fullTree.pruneSize(fullTree.idealPrune(2)) << endl;
+    //cout << "fullTree.pruneSize(fullTree.idealPrune(3)) "<< fullTree.pruneSize(fullTree.idealPrune(3)) << endl;
+
+    cout<< "fullTree.pruneSize(fullTree.idealPrune(255*255*3)) "<< fullTree.pruneSize(fullTree.idealPrune(255*255*3)) << endl;
+    cout<< "fullTree.pruneSize(fullTree.idealPrune(5000)) "<< fullTree.pruneSize(fullTree.idealPrune(5000)) << endl;
+
     // Test some creation/deletion functions
     Quadtree fullTree2;
     fullTree2 = fullTree;
@@ -67,25 +77,28 @@ int main()
     fullTree3.clockwiseRotate();
     imgOut = fullTree3.decompress();
     imgOut.writeToFile("outEtc.png");
-
+/*
     // ensure that printTree still works
     Quadtree tinyTree(imgIn, 32);
     //Quadtree temp = tinyTree;
     cout << "Printing tinyTree:\n";
     tinyTree.prune(100);
     tinyTree.printTree();
-
+*/
     //test pruneSize
 
     //cout << "tinyTree.pruneSize(100) = "      <<   temp.pruneSize(100) << endl;
-
-    
+    Quadtree emptyTree;
+    Quadtree test = Quadtree(emptyTree);
+    Quadtree test2 = emptyTree;
+    test.printTree();
+    test2.printTree();
     //test prune
     //Quadtree tinyPrune = tinyTree;
     //tinyPrune.prune(10);
     //cout << "Printing tinyPrune:\n";
-   // tinyTree.prune(100);
-   // tinyPrune.printTree();
+   //tinyTree.prune(100);
+    //tinyPrune.printTree();
 
     return 0;
 }

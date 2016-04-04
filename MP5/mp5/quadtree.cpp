@@ -20,30 +20,21 @@ void Quadtree::buildTree(PNG const & source, int resol)
 {
 	resolution = resol;
 	clear(root);
-<<<<<<< HEAD
-=======
-	//Quadtree tree;
-	root = new QuadtreeNode;
->>>>>>> parent of b639119... ctor
+	if(resolution == 0)
+		return;
 	int h=0;
 	embedPNG(source,root,h,(double)(resolution-1)/2,(double)(resolution-1)/2,resolution);
 
 }
 
-Quadtree::QuadtreeNode::QuadtreeNode()
-{
-		nwChild = NULL;
-		neChild = NULL;
-		swChild = NULL;
-		seChild = NULL;
-		element= RGBAPixel();
-}
-
 void Quadtree::embedPNG(PNG const & source, QuadtreeNode * &subRoot,int h, 
 								double x_cor, double y_cor, int resolution)
 {
+	if(h>log2(resolution))
+		return;
+	if(resolution == 0) 
+		return;
 	subRoot = new QuadtreeNode();
-	if(resolution == 0) return;
 	int height = log2 (resolution);
 	double nodeWidth = resolution/pow(2,h);
 	
@@ -80,10 +71,7 @@ Quadtree::Quadtree():root(NULL),resolution(0)
 Quadtree::Quadtree(PNG const & source, int resol)
 {
 	resolution = resol;
-<<<<<<< HEAD
-=======
 	int height=log2 (resolution);
->>>>>>> parent of b639119... ctor
 	int h=0;
 	embedPNG(source,root,h,(double)(resolution-1)/2,(double)(resolution-1)/2,resol);
 }
@@ -91,7 +79,11 @@ Quadtree::Quadtree(PNG const & source, int resol)
 //copy constructor
 Quadtree::Quadtree(Quadtree const & other)
 {
-	if(other.root == NULL) return;
+	root = NULL;
+	if(other.root == NULL) 
+		return;
+	if(other.resolution == 0)
+		return;
 	root = copyNode(other.root);
 	resolution = other.resolution;
 }
@@ -99,6 +91,8 @@ Quadtree::Quadtree(Quadtree const & other)
 //copyNode: helper function for copy constructor
 Quadtree::QuadtreeNode * Quadtree::copyNode(QuadtreeNode * const &subRoot) const
 {
+	if(subRoot == NULL)
+		return NULL;
 	QuadtreeNode * node = new QuadtreeNode();
 	node->element = subRoot->element;
 	if(subRoot->nwChild != NULL)
@@ -135,20 +129,15 @@ void Quadtree::clear(QuadtreeNode * &subRoot)
 //assignment operator=
 Quadtree const & Quadtree::operator=(Quadtree const & other)
 {
-	if(this == &other) return *this;
-<<<<<<< HEAD
-	else
-	{
-		clear(root);
-		root = copyNode(other.root);
-		resolution = other.resolution;
-	}
-=======
+	if(this == &other) 
+		return *this;
 	clear(root);
-	root = new QuadtreeNode;
+	if(other.resolution == 0)
+		return *this;
+	if(other.root == NULL) 
+		return *this;
 	root = copyNode(other.root);
 	resolution = other.resolution;
->>>>>>> parent of b639119... ctor
 	return *this;
 }	
 
@@ -249,7 +238,6 @@ void Quadtree::prune(int tolerance)
 	if(root == NULL)
 		return;
 	pruneNode(root, tolerance);
-
 
 }	
 
@@ -378,44 +366,21 @@ int Quadtree::idealPrune(int numLeaves)	const
 	return checkNumLeaves(numLeaves, (minTol+maxTol)/2, minTol, maxTol);
 
 }
-/*
-int Quadtree::maxDistRoot2Leave(QuadtreeNode * const &subRoot, QuadtreeNode * const &childLeave) const
-{
-	if(subRoot == NULL) return 0;
 
-	if(childLeave->nwChild == NULL)
-	{
-		int distance = pow(subRoot->element.red-childLeave->element.red,2) + pow(subRoot->element.blue-childLeave->element.blue,2) + pow(subRoot->element.green-childLeave->element.green,2);
-		return distance;
-	}
-
-	else return max(max(maxDistRoot2Leave(subRoot, subRoot->nwChild),maxDistRoot2Leave(subRoot, subRoot->neChild)), max(maxDistRoot2Leave(subRoot, subRoot->swChild),maxDistRoot2Leave(subRoot, subRoot->seChild)));
-}
-*/
 int Quadtree::checkNumLeaves(int numLeaves, int quasiTol, int min, int max) const
 {
 
 
 	int curNum = pruneSize(quasiTol);
-//	if (max<min)
-//		return min;
+	if (max<=min)
+		return min;
 	if(curNum>numLeaves )
-		return checkNumLeaves(numLeaves, (quasiTol+max)/2, quasiTol+1, max);
+		return checkNumLeaves(numLeaves, (quasiTol+max+1)/2, quasiTol+1, max);
 	if(curNum<numLeaves )
-		return checkNumLeaves(numLeaves, (quasiTol+min)/2, min, quasiTol-1);
+		return checkNumLeaves(numLeaves, (quasiTol+min-1)/2, min, quasiTol-1);
 	else 
 	{
-				/*
-		if(pruneSize(quasiTol-1) == numLeaves)
-			return checkNumLeaves(numLeaves, quasiTol-1, min, quasiTol);
-		else if(pruneSize(quasiTol-1) > numLeaves)  // Find it!!!
-			return quasiTol;
-		else 
-		{
-			cout << "Opps! Something must be wrong!" << endl;
-			return 99999;
-		}
-		*/
+
 		while(pruneSize(quasiTol)==numLeaves)
 		{
 			quasiTol = quasiTol-1;

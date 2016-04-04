@@ -53,7 +53,6 @@ class Quadtree
         QuadtreeNode* neChild; /**< pointer to northeast child */
         QuadtreeNode* swChild; /**< pointer to southwest child */
         QuadtreeNode* seChild; /**< pointer to southeast child */
-        QuadtreeNode();
         RGBAPixel element; /**< the pixel stored as this node's "data" */
     };
 
