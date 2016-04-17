@@ -244,9 +244,23 @@ class KDTree
     void printTree(int low, int high, std::vector<std::string>& output,
                    int left, int top, int width, int currd) const;
 
-    /**
+    /*************************************************************************
      * @todo Add your helper functions here.
-     */
+     *************************************************************************/
+
+    void KDPoint(const vector<Point<Dim>>& newPoints, vector<int> &index, int curDim);
+
+    int partition(const vector<Point<Dim>>& points, vector<int> &index, int l, int r, int curDim);
+
+    int quickSelect(const vector<Point<Dim>>& points, vector<int> &index, int l, int r, int curDim, int median);
+
+    int findNearestNeighbor(const Point<Dim>& query, const vector<int> &index, int l, int u, int curIndex, int curDim) const;
+
+    int size = points.size();
+
+    vector<int> index;
+
+    /*************************************************************************/
 
 };
 
