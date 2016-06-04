@@ -1,0 +1,8 @@
+Grading r6993 by tolar2 committed on Mon Feb  1 15:04:51 CST 2016
+Monad Autograder
+Testing mp2.1 at 2016-02-03 00:34:33
+
+"Honestly, if you don't fit in, then you're probably doing the right thing." ~ LIGHTS
+
+Setting up test environment...
+Error: /dev/shm/cs225student/autograder/temp/mp2/Makefile does not exist.

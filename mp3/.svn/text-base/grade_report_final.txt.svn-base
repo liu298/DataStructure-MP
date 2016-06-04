@@ -1,0 +1,103 @@
+Grading r19749 by liu298 committed on Fri Feb 26 12:28:31 CST 2016
+Monad Autograder
+Testing mp3 at 2016-02-27 00:37:23
+
+"There's not enough wiggleability, you know." ~ Eric Shaffer
+
+Setting up test environment...
+Compiling...
+================================================================
+
+
+Running tests...
+================================================================
+testInsertFront  . . . . . . . . [2 pts]  - passed
+testInsertBack . . . . . . . . . [2 pts]  - passed
+testDestructor10 (asan)  . . . . [3 pts]  - passed
+testDestructor37 (asan)  . . . . [3 pts]  - passed
+testReverse20_size . . . . . . . [1 pts]  - passed
+testReverse20_forward  . . . . . [1 pts]  - passed
+testReverse20_backward . . . . . [1 pts]  - passed
+testReverse37_size . . . . . . . [1 pts]  - passed
+testReverse37_forward  . . . . . [1 pts]  - passed
+testReverse37_backward . . . . . [1 pts]  - passed
+testReverseEmpty (asan)  . . . . [1 pts]  - passed
+testReverse20_memory (asan)  . . [1 pts]  - passed
+testReverseNth20_2_size  . . . . [1 pts]  - passed
+testReverseNth20_2_forward . . . [1 pts]  - passed
+testReverseNth20_2_backward  . . [1 pts]  - passed
+testReverseNth37_4_size  . . . . [1 pts]  - passed
+testReverseNth37_4_forward . . . [1 pts]  - passed
+testReverseNth37_4_backward  . . [1 pts]  - passed
+testReverseNth37_37  . . . . . . [1 pts]  - passed
+testReverseNth37_4_memory (asan) [1 pts]  - passed
+testReverseNthEmpty (asan) . . . [1 pts]  - passed
+testWaterfall4_size  . . . . . . [1 pts]  - passed
+testWaterfall4_forward . . . . . [1 pts]  - passed
+testWaterfall4_backward  . . . . [2 pts]  - passed
+testWaterfall7_size  . . . . . . [1 pts]  - passed
+testWaterfall7_forward . . . . . [1 pts]  - passed
+testWaterfall7_backward  . . . . [2 pts]  - passed
+testWaterfall12_size . . . . . . [1 pts]  - passed
+testWaterfall12_forward  . . . . [1 pts]  - passed
+testWaterfall12_backward . . . . [2 pts]  - passed
+testWaterfall7_memory (asan) . . [3 pts]  - passed
+testWaterfall7_empty (asan)  . . [3 pts]  - passed
+testSplit5_this_size . . . . . . [1 pts]  - passed
+testSplit5_this_forward  . . . . [1 pts]  - passed
+testSplit5_this_backward . . . . [1 pts]  - passed
+testSplit5_split_size  . . . . . [1 pts]  - passed
+testSplit5_split_forward . . . . [1 pts]  - passed
+testSplit5_split_backward  . . . [1 pts]  - passed
+testSplit5_mem (asan)  . . . . . [3 pts]  - passed
+testMerge_size . . . . . . . . . [1 pts]  - passed
+testMerge_forward  . . . . . . . [1 pts]  - passed
+testMerge_backward . . . . . . . [1 pts]  - passed
+testMerge_mem (asan) . . . . . . [3 pts]  - passed
+testSort16p_s  . . . . . . . . . [1 pts]  - passed
+testSort16p_f  . . . . . . . . . [2 pts]  - passed
+testSort16p_b  . . . . . . . . . [2 pts]  - passed
+testSort20p_s  . . . . . . . . . [1 pts]  - passed
+testSort20p_f  . . . . . . . . . [2 pts]  - passed
+testSort20p_b  . . . . . . . . . [2 pts]  - passed
+testSort27p_s  . . . . . . . . . [1 pts]  - passed
+testSort27p_f  . . . . . . . . . [2 pts]  - passed
+testSort27p_b  . . . . . . . . . [2 pts]  - passed
+testSortEmpty  . . . . . . . . . [5 pts]  - passed
+testSort259p_s . . . . . . . . . [1 pts]  - passed
+testSort259p_f . . . . . . . . . [2 pts]  - FAILED: unit_tests.cpp:115: List does not match solution with forward traversal
+testSort259p_b . . . . . . . . . [2 pts]  - FAILED: unit_tests.cpp:117: List does not match solution with backward traversal
+testSortMemLeak (asan) . . . . . [5 pts]  - passed
+testSortNlogN  . . . . . . . . . [10 pts] - passed
+
+
+Total score...
+================================================================
+TOTAL SCORE: 96
+
+
+
+Detailed test output...
+================================================================
+----------------------------------------------------------------
+testSort259p_f [2 points]
+Result: FAILED: unit_tests.cpp:115: List does not match solution with forward traversal
+Took 0ms (1000ms timeout)
+Output:
+----------------------------------------------------------------
+< 1 2 3 6 8 11 12 12 13 13 14 16 16 19 19 19 19 24 26 28 28 28 31 32 32 33 34 34 34 37 39 39 41 42 42 43 43 43 44 47 47 48 48 50 50 50 51 51 54 54 54 54 56 58 58 60 61 61 66 69 70 70 73 74 75 76 77 77 78 79 79 79 80 81 82 83 84 85 85 85 86 87 87 90 92 93 95 95 96 96 97 99 99 99 100 101 101 102 103 103 105 105 105 107 107 108 109 111 111 112 112 112 115 115 115 115 116 116 116 116 120 121 122 123 123 124 125 127 129 129 129 129 129 130 130 131 132 133 133 133 135 137 138 139 139 143 143 144 145 146 147 149 149 151 151 153 154 156 157 157 161 161 162 165 166 167 169 171 171 173 174 174 174 177 179 182 182 183 187 187 187 188 190 190 191 193 193 194 195 195 196 197 197 197 198 199 200 200 200 201 201 202 202 202 202 202 203 205 207 209 212 212 214 215 215 215 217 218 218 218 218 219 220 220 221 224 225 228 230 232 234 235 236 236 237 237 238 238 238 239 239 241 241 242 247 247 249 250 252 252 254 254 255 256 256 >
+
+----------------------------------------------------------------
+testSort259p_b [2 points]
+Result: FAILED: unit_tests.cpp:117: List does not match solution with backward traversal
+Took 0ms (1000ms timeout)
+Output:
+----------------------------------------------------------------
+< 1 2 3 6 8 11 12 12 13 13 14 16 16 19 19 19 19 24 26 28 28 28 31 32 32 33 34 34 34 37 39 39 41 42 42 43 43 43 44 47 47 48 48 50 50 50 51 51 54 54 54 54 56 58 58 60 61 61 66 69 70 70 73 74 75 76 77 77 78 79 79 79 80 81 82 83 84 85 85 85 86 87 87 90 92 93 95 95 96 96 97 99 99 99 100 101 101 102 103 103 105 105 105 107 107 108 109 111 111 112 112 112 115 115 115 115 116 116 116 116 120 121 122 123 123 124 125 127 129 129 129 129 129 130 130 131 132 133 133 133 135 137 138 139 139 143 143 144 145 146 147 149 149 151 151 153 154 156 157 157 161 161 162 165 166 167 169 171 171 173 174 174 174 177 179 182 182 183 187 187 187 188 190 190 191 193 193 194 195 195 196 197 197 197 198 199 200 200 200 201 201 202 202 202 202 202 203 205 207 209 212 212 214 215 215 215 217 218 218 218 218 219 220 220 221 224 225 228 230 232 234 235 236 236 237 237 238 238 238 239 239 241 241 242 247 247 249 250 252 252 254 254 255 256 256 >
+
+
+----------------------------------------------------------------
+Total score...
+================================================================
+TOTAL SCORE: 96
+
